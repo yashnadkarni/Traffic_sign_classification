@@ -37,10 +37,6 @@ axes = axes.ravel() # flaten the 5 x 5 matrix into 25 array
 
 n_training = len(X_train) # get the length of the training dataset
 
-# Select a random number from 0 to n_training
-# create evenly spaces variables 
-
-    # Select a random number
 for i in np.arange(0,W_grid*L_grid):
     index=np.random.randint(0,n_training)
     axes[i].imshow(X_train[index])
@@ -67,7 +63,7 @@ plt.figure()
 plt.imshow(X_train_gray_norm[i].squeeze(), cmap = 'gray')
 
 
-#Model 
+#Model building
 
 from tensorflow.keras import datasets, layers, models
 
@@ -75,14 +71,10 @@ CNN=models.Sequential()
 
 CNN.add(layers.Conv2D(6,(5,5),activation='relu',input_shape=(32,32,1)))
 CNN.add(layers.AveragePooling2D())
-
 CNN.add(layers.Dropout(0.2))
 CNN.add(layers.Conv2D(16,(5,5),activation='relu'))
 CNN.add(layers.AveragePooling2D())
-
-
 CNN.add(layers.Flatten())
-
 CNN.add(layers.Dense(120,activation='relu'))
 CNN.add(layers.Dense(84,activation='relu'))
 CNN.add(layers.Dense(43, activation='softmax'))
@@ -123,8 +115,8 @@ cm = confusion_matrix(y_true, predicted_classes)
 plt.figure(figsize = (25, 25))
 sns.heatmap(cm, annot = True)
 
-#prediction
-L = 5
+#actual prediction
+L = 5  #change numbers
 W = 5
 
 fig, axes = plt.subplots(L, W, figsize = (12, 12))
